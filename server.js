@@ -76,7 +76,7 @@ app.get('*', function(req, res, next) {
   }
 
   if (variables.lastDailyDate == lastDate) {
-    console.log('Последнее обновлени данных было' + lastDate + 'числа  ' + new Date(Date.now()));
+    console.log('Последнее обновлени данных было ' + lastDate + ' числа  ' + new Date(Date.now()));
     next();
 
 
@@ -693,7 +693,7 @@ app.post('/invitefriend', function(req, res) {
   if (req.session.user) {
     if (req.body.email) {
       // create reusable transporter object using the default SMTP transport 
-      var transporter = nodemailer.createTransport('smtps://oleynalex%40yandex.ru:1h%40v3100k@smtp.yandex.ru');
+      var transporter = nodemailer.createTransport(process.env.emailer);
 
       // setup e-mail data with unicode symbols 
       var mailOptions = {

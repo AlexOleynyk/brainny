@@ -16,6 +16,8 @@ head
                     div.col-md-6
                         h2 Регистрация
                         form(method="post" action="adduser")
+                            if emailreg == null
+                                - emailreg = ''
                             div.form-group
                                 input.form-control(type="email" name="email" placeholder="Email" value="#{emailreg}" required)
                             div.form-group.hidden
