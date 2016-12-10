@@ -10,6 +10,14 @@ head
                 p Уровень #{user.statistic.level}
                 p Опыт #{user.statistic.experience}
                 p твоя реферальная ссылка: freecodeapi-oleynalex.c9users.io/?ref=#{user.username}
+                p Или можешь пригласить друзей по почте
+                
+                .row
+                    form(method="post" action="invitefriend")
+                            div.form-group.col-md-6
+                                input.form-control(type="email" name="email" placeholder="Email" required)
+                            div.form-group.col-md-6
+                                input.btn.btn-default(type="submit" value="Пригласить")
             else 
                 h2 #{error} =( 
             

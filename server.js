@@ -683,6 +683,40 @@ app.get('/sendmail', function(req, res) {
 
 });
 
+
+app.post('/invitefriend', function(req, res) {
+
+  var nodemailer = require('nodemailer');
+
+  if (req.body.email) {
+    // create reusable transporter object using the default SMTP transport 
+    var transporter = nodemailer.createTransport('smtps://oleynalex%40yandex.ru:1h%40v3100k@smtp.yandex.ru');
+
+    // setup e-mail data with unicode symbols 
+    var mailOptions = {
+      from: '"Fred Foo 👥" <oleynalex@yandex.ru>', // sender address 
+      to: req.body.email, // list of receivers 
+      subject: 'Приглашение в Brainny', // Subject line 
+      text: 'Привет', // plaintext body 
+      html: '<b>Привет!/b> <br> <p> Пользователь ' + req.session.user.username + 'приглашает тебя тренировать мозг  сервисе Brainny. Ты моешь зарегестрироваться по этой ссылке <a href="brainny.herokuapp.com?ref='+req.session.user.username+'">Зарегестрироваться</a>.</p>' // html body 
+    };
+
+    // send mail with defined transport object 
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: ' + info.response);
+      res.redirect('/');
+    });
+  }
+  else {
+    res.redirect('/');
+  }
+
+});
+
+
 app.get('/:username', (req, res) => {
   if (req.params.username != 'favicon.ico') {
     var user = req.session.user;
@@ -788,10 +822,4 @@ function updateDaily() {
 app.listen(port, function() {
   console.log('Server starts on ' + port + ' port');
 
-
-
-
-
-
-  // mongodb://root:oleynalex2729@ds111798.mlab.com:11798/braingame
 })
