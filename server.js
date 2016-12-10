@@ -705,13 +705,13 @@ app.post('/invitefriend', function(req, res) {
         // '<a href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
         // '<p>Если с ссылкой что-то не так, просто скопируй этот адрес и вставь его в адресную строку браузера: </p>' + 
         // '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'   // html body 
-        html: '<style>  table {    font-family: sans-serif;    line-height: 28px;    background: #131728;    color: white;    width: 100%;'+
-    'text-align: center;    padding: 50px;  }   .btn {    background: #2fb16f;    display: inline-block;    margin-top: 20px;' + 
-    'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;'+
-    'box-shadow: 0 0 30px 0 $btnPrimary;  }</style><table>  <tr>'+
+        html: '<style>  table {  }   .btn {      }</style><table style="   font-family: sans-serif;    line-height: 28px;    background: #131728;    color: white;    width: 100%;'+
+    'text-align: center;    padding: 50px; ">  <tr>'+
     '<td><h2>Привет</h2></td>'+
     '</tr>  <tr> <td><p>Пользователь '+ req.session.user.username +' приглашает тебя тренировать мозг в сервисе Brainny. <br> Ты можешь зарегистрироваться по этой ссылке: </p></td>'+
-    '</tr>  <tr>    <td>      <a class="btn" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '"> Зарегестрироваться </a>    </td>  </tr></table>'        // html body 
+    '</tr>  <tr>    <td>      <a class="btn" style="background: #2fb16f;    display: inline-block;    margin-top: 20px;' + 
+    'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;'+
+    'box-shadow: 0 0 30px 0 $btnPrimary;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '"> Зарегестрироваться </a>    </td>  </tr></table>'        // html body 
       };
 
       // send mail with defined transport object 
