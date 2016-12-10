@@ -711,7 +711,7 @@ app.post('/invitefriend', function(req, res) {
     '</tr>  <tr> <td><p>Пользователь '+ req.session.user.username +' приглашает тебя тренировать мозг в сервисе Brainny. <br> Ты можешь зарегистрироваться по этой ссылке: </p></td>'+
     '</tr>  <tr>    <td>      <a class="btn" style="background: #2fb16f;    display: inline-block;    margin-top: 20px;' + 
     'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;'+
-    'box-shadow: 0 0 30px 0 $btnPrimary;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '"> Зарегестрироваться </a>    </td>  </tr></table>'        // html body 
+    'box-shadow: 0 0 30px 0 #2fb16f;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '"> Зарегистрироваться </a>    </td>  </tr></table>'        // html body 
       };
 
       // send mail with defined transport object 
