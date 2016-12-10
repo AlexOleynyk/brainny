@@ -1,0 +1,114 @@
+// .workout
+//     .row.workout_heading
+//         .col-xs-8
+//             .text_block    
+//                 h3  Ежедневная тренировка
+//                 p У тебя хорошо получается! Осталось еще совсем немного - всего 2 мини-игры.
+//         .col-xs-4
+//             .btn_block
+//                 a.primary-btn(href="#") Продолжить тренировку
+//     .workout_body.row
+//         .col-xs-3
+//             .complete_game_preview.memory_game
+//                 .tag
+//                     span.memory_game память
+//                 .done_wrapper
+//                     .done_mark
+//                         img(src="img/complete-game.png")
+//                         span Пройдено
+//                 .game_info
+//                     .game_heading
+//                         h4 Power Brain
+//                         span Рекорд: 127
+//         .col-xs-3
+//             .complete_game_preview.logic_game
+//                 .tag
+//                     span.logic_game логика
+//                 .done_wrapper
+//                     .done_mark
+//                         img(src="img/complete-game.png")
+//                         span Пройдено
+//                 .game_info
+//                     .game_heading
+//                         h4 Power Brain
+//                         span Рекорд: 127
+//         .col-xs-3
+//             .game_preview.attention_game
+//                 .tag
+//                     span.attention_game внимание
+//                 .game_info
+//                     .game_heading
+//                         h4 Power Brain
+//                         span Рекорд: 127
+//                     .game_decription
+//                         p Эта игра помогает лучше запоминать отдельные и несвязанные пары. Тренируеться долгосрочная память и внимание.
+//         .col-xs-3
+//             .game_preview.reaction_game
+//                 .tag
+//                     span.reaction_game реакция
+//                 .game_info
+//                     .game_heading
+//                         h4 Power Brain
+//                         span Рекорд: 127
+//                     .game_decription
+//                         p Эта игра помогает лучше запоминать отдельные и несвязанные пары. Тренируеться долгосрочная память и внимание.
+        
+.workout
+    .row.workout_heading
+        .col-xs-8
+            .text_block    
+                h3  Ежедневная тренировка
+                if currentUser.dailyWorkout == 0
+                    p Ну что, давай начнем тренировку?
+                else if  currentUser.dailyWorkout == workout.length
+                    p Молодец! Ты справился со всеми заданиями
+                else
+                    - var gamesLeft = workout.length - currentUser.dailyWorkout
+                    
+                    p У тебя хорошо получается! Осталось еще совсем немного - всего #{gamesLeft} мини-игры.
+        .col-xs-4
+            .btn_block
+                if currentUser.dailyWorkout == 0
+                    a.primary-btn(href="/workout") Начать тренировку
+                else if  currentUser.dailyWorkout == workout.length
+                    a.primary-btn(href="/workout_check") Начать заново
+                else 
+                    a.primary-btn(href="/workout") Продолжить тренировку
+    .workout_body.row
+        if workout != null
+            - each item, index in workout
+                .col-md-3
+                    if index < currentUser.dailyWorkout
+                        .complete_game_preview(class="#{item.category}")
+                                .tag
+                                   span(class="#{item.category}") #{item.categoryRu}
+                                .done_wrapper
+                                    .done_mark
+                                        img(src="img/complete-game.png")
+                                        span Пройдено
+                                .game_info
+                                    .game_heading
+                                        h4 #{item.title}
+                                            - var game = item.game
+                                            // - console.log(currentUser.username);
+    
+                                            
+                                        span Уровень: #{currentUser.games[game].difficulty}
+                                        - //#{currentUser.bestScore}
+                                        
+                    else 
+                        .game_preview(class="#{item.category}")
+                            .tag
+                                span(class="#{item.category}") #{item.categoryRu}
+                            .game_info
+                                .game_heading
+                                    h4 #{item.title}
+                                        - var game = item.game
+                                        // - console.log(currentUser.games[game]);
+                                        
+                                    span Уровень: #{currentUser.games[game].difficulty}
+                                    - // #{currentUser.bestScore}
+                                    
+                                .game_decription
+                                    p #{item.description}
+        

@@ -1,0 +1,23 @@
+div.row.header_conteiner
+    .col-xs-2
+        .logo_container
+            span #[a(href="/") Brainny]
+    if currentUser.username != ''
+        .col-xs-4
+            .left_menu_container
+                ul
+                    li #[a(href="/games") Игры]
+                    li #[a(href="#") Дуэли]
+        .col-xs-6
+            .right_menu_container.text-right
+                ul.text-right
+                    li #[a(href="#") #{currentUser.braincoins} bc]
+                    li #[a(href="#{currentUser.username}") #{currentUser.username} ]
+                    li #[a(href="logout") #[img(src="img/log-out.png")]]
+    else
+        .col-xs-4
+            .left_menu_container
+        .col-xs-6
+            .right_menu_container.text-right
+                ul.text-right
+                    li #[a(href="/") Зарегистрироваться]

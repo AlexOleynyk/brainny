@@ -1,0 +1,56 @@
+
+
+.row
+    .col-xs-12
+        .game_container
+            // - var path  = '../games/'  + workout.game + '.jade'
+        
+            // p #{path}
+            // include ../games/ + workout.game + .jade
+
+            case workout.game
+                when 'power_brain'
+                    include ../games/power_brain.jade
+                when 'find_path'
+                    include ../games/find_path.jade
+                default
+                    include error.jade
+                    - console.log('"Игры с таким именен нет"')
+            
+            .game_intro.col-xs-6.text-center
+                .tag
+                    span(class="#{workout.category}") #{workout.categoryRu}
+                .game_heading
+                            h4 #{workout.title}
+                            - var game = workout.game;
+                            
+                            span Уровень: #{currentUser.games[game].difficulty}
+                .game_info
+                    p #{workout.fullDescription}
+                a.primary-btn#start_game(href="#") Начать
+                
+            .game_results.col-xs-6.text-center.hide_results
+                .tag
+                    span(class="#{workout.category}") #{workout.categoryRu}
+                .game_heading
+                            h4 #{workout.title}
+                .game_info
+                    p Brain coins заработано: 
+                        span#brainCoinsGet
+                    p Ошибок сделано: 
+                        span#errorsDone
+                    p Начальная сложность в следующей игре: 
+                        span#startDifficulty
+                a.primary-btn#nextGame(href="#") Следующая игра
+            
+if daily.game == workout.game
+    include daily.jade
+if achivments.length != 0
+    script. 
+        var achivments = !{JSON.stringify(achivments)}
+    
+    - each achive in achivments
+        include achivments.jade
+        
+    
+-//script(src="js/gameButtonsHandler.js")

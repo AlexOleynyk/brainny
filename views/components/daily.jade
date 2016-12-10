@@ -1,0 +1,20 @@
+if currentUser.completeDailyQuest == false
+    .workout
+        .row.workout_heading
+            .col-xs-6
+                .text_block    
+                    h3  Ежедневное задание
+                    p #{daily.description}
+    
+            .col-xs-3
+                .btn_block
+                    .prize
+                        span.prize_count +#{daily.prize}
+                        span.prize_text brain coins
+                            
+                            
+                    
+            .col-xs-3
+                .btn_block
+                    a.primary-btn(href="/workout") Выполнить
+        

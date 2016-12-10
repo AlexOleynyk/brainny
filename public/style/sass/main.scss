@@ -1,0 +1,605 @@
+/*.custom {*/
+
+
+/*    color: red;*/
+
+
+/*}*/
+
+$bgColorLight: #131728;
+$bgColorDark: #352743;
+$btnPrimary: #2fb16f;
+$memory: #48b3fe;
+$logic: #2fb16f;
+$attention: #e04d42;
+$reaction: #edc35d;
+$shadow: #131728;
+.bigdiv {
+    height: 00px;
+}
+
+.imgmy {
+    display: block;
+    margin: 0 auto;
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    color: white;
+    background: linear-gradient(135deg, $bgColorLight, $bgColorDark);
+    position: relative;
+}
+
+.header_conteiner {
+    height: 104px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.logo_container {
+    font-size: 30px;
+    display: table;
+    height: 104px;
+}
+
+.logo_container a {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.logo_container span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.left_menu_container {
+    /*font-size: 36px;*/
+    display: table;
+    height: 104px;
+}
+
+.left_menu_container ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.left_menu_container ul li {
+    display: inline-block;
+    list-style: none;
+    padding-right: 20px;
+}
+
+.left_menu_container ul li a {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+.right_menu_container {
+    /*font-size: 36px;*/
+    width: 100%;
+    display: table;
+    height: 104px;
+}
+
+.right_menu_container ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.right_menu_container ul li {
+    display: inline-block;
+    list-style: none;
+    padding-right: 20px;
+}
+
+.right_menu_container ul li a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.right_menu_container img {
+    opacity: 0.5;
+}
+
+.right_menu_container img:hover {
+    opacity: 1;
+}
+
+
+/*  footer    */
+
+.footer_conteiner {
+    margin-top: 50px;
+    height: 104px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer_conteiner .left_menu_container {
+    width: 100%;
+}
+
+
+/*     workout      */
+
+.workout {
+    margin-top: 50px;
+}
+
+.workout_heading {
+    height: 80px;
+    // overflow: hidden;
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 10px 0 8px 0;
+    }
+    p {
+        font-size: 18px;
+        font-weight: 100;
+    }
+    .btn_block {
+        height: 100%;
+        position: relative;
+        a {
+            position: absolute;
+            top: 50%;
+            margin-top: -24px;
+            right: 0px;
+            // box-sizing: border-box;
+        }
+        .prize {
+            position: absolute;
+            top: 50%;
+            margin-top: -34px;
+            right: 0px;
+            .prize_count {
+                display: inline-block;
+                // color: $btnPrimary;
+                font-size: 48px;
+                // width: 46px;
+            }
+            .prize_text {
+                display: inline-block;
+                color: $btnPrimary;
+                font-size: 18px;
+                width: 46px;
+                line-height: 16px;
+            }
+        }
+    }
+}
+
+.workout_body {
+    margin-top: 50px;
+}
+
+.primary-btn {
+    &:active,
+    &:visited,
+    &:link {
+        // font-size: 16px;
+        display: inline-block;
+        background: $btnPrimary;
+        margin-top: 20px; // добавил
+        padding: 14px 22px;
+        color: white;
+        text-transform: uppercase;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 0 30px 0 $btnPrimary;
+        transition: all 0.4s;
+    }
+    &:hover {
+        text-decoration: none;
+        color: white;
+        background: lighten($btnPrimary, 5%);
+        box-shadow: 0 0 30px 0 lighten($btnPrimary, 5%);
+    }
+}
+
+
+/*     game preview      */
+
+.game_preview {
+    height: 330px;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    &:before {
+        border-radius: 10px;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        transition: opacity 0.45s ease-in-out;
+    }
+    &.memory_game {
+        background: linear-gradient(to top, rgba($memory, 0.9), rgba($memory, 0)), url(../../img/powerbrain.png);
+        background-size: cover;
+        &:before {
+            background: rgba($memory, 0.9);
+        }
+    }
+    &.logic_game {
+        background: linear-gradient(to top, rgba($logic, 0.9), rgba($logic, 0)), url(../../img/findpath.png);
+        background-size: cover;
+        &:before {
+            background: rgba($logic, 0.9);
+        }
+    }
+    &.attention_game {
+        background: linear-gradient(to top, rgba($attention, 0.9), rgba($attention, 0)), url(../../img/powerbrain.png);
+        background-size: cover;
+        &:before {
+            background: rgba($attention, 0.9);
+        }
+    }
+    &.reaction_game {
+        background: linear-gradient(to top, rgba($reaction, 0.9), rgba($reaction, 0)), url(../../img/findpath.png);
+        background-size: cover;
+        &:before {
+            background: rgba($reaction, 0.9);
+        }
+    }
+    &:hover {
+        cursor: default;
+        &:before {
+            opacity: 1;
+        }
+        .game_info {
+            top: 70px;
+        }
+    }
+}
+
+.complete_game_preview {
+    height: 330px;
+    border-radius: 10px;
+    padding: 10px;
+    &.memory_game {
+        background: linear-gradient(to top, rgba($memory, 0.9), rgba($memory, 0.9)), url(../../img/powerbrain.png);
+        background-size: cover;
+    }
+    &.logic_game {
+        background: linear-gradient(to top, rgba($logic, 0.9), rgba($logic, 0.9)), url(../../img/findpath.png);
+        background-size: cover;
+    }
+    &.attention_game {
+        background: linear-gradient(to top, rgba($attention, 0.9), rgba($attention, 0.9)), url(../../img/powerbrain.png);
+        background-size: cover;
+    }
+    &.reaction_game {
+        background: linear-gradient(to top, rgba($reaction, 0.9), rgba($reaction, 0.9)), url(../../img/findpath.png);
+        background-size: cover;
+    }
+    .done_wrapper {
+        transition: all 0.2s;
+    }
+    .done_mark {
+        text-align: center;
+        margin: 80px auto;
+        opacity: 0;
+        transform: scale(0.1);
+        animation: done_mark 0.5s forwards;
+        transition: all 0.4s;
+        @keyframes done_mark {
+            80% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        span {
+            display: block;
+            margin-top: 10px;
+        }
+    }
+    &:hover {
+        cursor: default;
+        .done_wrapper {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.game_preview .tag,
+.complete_game_preview .tag {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    span {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 50px;
+        background: $logic;
+        box-shadow: 0 0 40px 0 rgba($shadow, 0.57);
+        &.memory_game {
+            background: $memory;
+        }
+        &.logic_game {
+            background: $logic;
+        }
+        &.attention_game {
+            background: $attention;
+        }
+        &.reaction_game {
+            background: $reaction;
+        }
+    }
+}
+
+.game_preview,
+.complete_game_preview {
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 $shadow;
+    .game_info {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top: 260px;
+        transition: all 0.5s;
+        .game_heading {
+            h4 {
+                font-size: 22px;
+                font-weight: 800;
+                margin-bottom: 0;
+            }
+            span {
+                font-size: 16px;
+                font-weight: 300;
+            }
+        }
+    }
+    .game_decription {
+        margin-top: 20px;
+        padding: 0 15px;
+        p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 25px;
+        }
+    }
+}
+
+
+/* games.jade  */
+
+.game_container {
+    min-height: 600px;
+    background: rgba(#000, 0.1);
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.game_intro,
+.game_results {
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    opacity: 0;
+    animation: blockAppearence 0.5s forwards;
+    
+    &.hide_intro {
+        opacity: 1;
+        display: block;
+        animation: gameIntroHide 0.5s forwards;
+    }
+    
+    &.hide_results {
+        opacity: 0;
+        display: none;
+        // animation: blockAppearence 0.5s forwards;
+    }
+    
+    @keyframes gameIntroHide {
+        100% {
+            // display: none;
+            // transform: scale(0.1);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes blockAppearence {
+
+        100% {
+            // display: none;
+            //  transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+    .tag {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        span {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: $logic;
+            box-shadow: 0 0 40px 0 rgba($shadow, 0.57);
+            &.memory_game {
+                background: $memory;
+            }
+            &.logic_game {
+                background: $logic;
+            }
+            &.attention_game {
+                background: $attention;
+            }
+            &.reaction_game {
+                background: $reaction;
+            }
+        }
+    }
+    .game_heading {
+        h4 {
+            font-size: 40px;
+        }
+        span {
+            font-size: 20px;
+        }
+    }
+    .game_info {
+        margin: 20px;
+    }
+}
+
+
+
+
+/*    popover  message   */
+
+.popup_container {
+    background: rgba(#000, 0.4);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    
+    .popup_message {
+        position: absolute;
+        background: rgba(#000, 0.8);
+        border-radius: 10px;
+        padding: 60px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        &.popup_hidden{
+            opacity: 0;
+            display: none;
+        }
+        
+        .prize {
+
+            .prize_count {
+                display: inline-block;
+                // color: $btnPrimary;
+                font-size: 48px;
+                // width: 46px;
+            }
+            .prize_text {
+                display: inline-block;
+                color: $btnPrimary;
+                font-size: 18px;
+                width: 46px;
+                line-height: 16px;
+            }
+        }
+    }
+}
+
+
+
+/* power brain */
+
+.main_game_wrapper {
+    // background: rgba(#000, 0.1);
+    // width: 400px;
+    // height: 400px;
+    // height: 400px;
+    // width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: mainGameWrapperAppearence 0.5s forwards 0.5s;
+    @keyframes mainGameWrapperAppearence {
+        1% {
+            display: block;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    &.myHidden {
+        display: none;
+        opacity: 0;
+    }
+}
+
+.cell {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    transform: scale(0.1);
+    animation: cellApperence 0.1s ease-in-out forwards;
+    @keyframes cellApperence {
+        100% {
+            transform: scale(1);
+        }
+    }
+    &.active {
+        background: $memory;
+    }
+    &.flip.active {
+        background: white;
+        animation: activeFlip 0.4s forwards ease-in-out;
+        transform: rotateY(-180deg);
+        @keyframes activeFlip {
+            0% {
+                transform: rotateY(-180deg);
+            }
+            49% {
+                background: white;
+            }
+            50% {
+                background: $memory;
+            }
+            100% {
+                background: $memory;
+                transform: rotateY(0deg);
+            }
+        }
+    }
+    &.flip.fail {
+        background: white;
+        animation: failFlip 0.4s forwards ease-in-out;
+        transform: rotateY(-180deg);
+        @keyframes failFlip {
+            0% {
+                transform: rotateY(-180deg);
+            }
+            49% {
+                background: white;
+            }
+            50% {
+                background: $attention;
+            }
+            100% {
+                background: $attention;
+                transform: rotateY(0deg);
+            }
+        }
+    }
+}

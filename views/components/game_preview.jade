@@ -1,0 +1,24 @@
+.col-md-3
+    if index+1 < currentUser.dailyWorkout 
+        .complete_game_preview(class="#{item.category}")
+                .tag
+                   span(class="#{item.category}") #{item.categoryRu}
+                .done_wrapper
+                    .done_mark
+                        img(src="img/complete-game.png")
+                        span Пройдено
+                .game_info
+                    .game_heading
+                        h4 #{item.title}
+                        span Рекорд: #{currentUser.bestScore}
+    else 
+        .game_preview(class="#{item.category}")
+            .tag
+                span(class="#{item.category}") #{item.categoryRu}
+            .game_info
+                .game_heading
+                    h4 #{item.title}
+                    span Рекорд: #{currentUser.bestScore}
+                .game_decription
+                    p #{item.description}
+        

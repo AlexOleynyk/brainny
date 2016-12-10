@@ -1,0 +1,35 @@
+html
+    head
+        title Workout
+        include links.jade
+    
+    body
+        div.container
+            include header.jade
+            br   
+            // .row
+            //     .col-xs-6
+            //         h3 #{workout.title}
+            //     .col-xs-6
+            //         .btn_block
+            //             a.primary-btn(href="/workout_check") Выполнить
+            
+            - // Утановка параметров для работы внутри скрипта игры
+            
+            - var game = workout.game
+            - var levelParam = currentUser.games[game].difficulty;
+        
+            script.
+                var user = "#{currentUser.username}", 
+                     workoutJS = "#{workout.title}"; 
+                     
+                var levelParam = #{levelParam};    // ставить из базы сложность
+
+            
+            include components/game.jade 
+
+            include footer.jade         
+        
+                   
+            
+        script(src="js/games/#{workout.game}.js")

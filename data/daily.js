@@ -1,0 +1,1 @@
+module.exports = {"game":"power_brain","description":"Вот тебе просто смайлик ☺","prize":18,"cryteria":null}

@@ -1,0 +1,24 @@
+{
+  "name": "brainy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "jade": "^1.11.0",
+    "mailgun-js": "^0.7.14",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.1",
+    "node-sass-middleware": "^0.10.0"
+  }
+}

@@ -1,0 +1,45 @@
+html
+    title Brainy
+    include links.jade
+head
+    body
+        div.container
+            include header.jade
+            // form(method="post" action="updateScore")
+            //     input(type="submit" value="Обновить счет")
+            
+        
+            if workout != null
+                - each category, key in workout 
+                    .workout_body.row
+                        .col-md-12
+                            case key
+                                when 'memoryGames'
+                                   h3 Игры на развитие памяти
+                                when 'logicGames'
+                                    h3 Игры на развитие логики
+                                when 'attentionGames'
+                                    h3 Игры на развитие внимания
+                                when 'reactionGames'
+                                    h3 Игры на развитие реакции
+                                default
+                                    h3 Гномы решили добавить эту строку здесь.
+                            
+                        - each item, index in category
+                            .col-md-3
+                                .game_preview(class="#{item.category}")
+                                    .tag
+                                        span(class="#{item.category}") #{item.categoryRu}
+                                    .game_info
+                                        .game_heading
+                                            h4 #{item.title}
+                                                - var game = item.game
+                                                // - console.log(currentUser.games[game]);
+                                                
+                                            span Уровень: #{currentUser.games[game].difficulty}
+                                            - // #{currentUser.bestScore}
+                                            
+                                        .game_decription
+                                            p #{item.description}
+                                    
+        

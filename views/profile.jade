@@ -1,0 +1,20 @@
+html
+    title Profile
+    include links.jade
+head
+    body
+        div.container
+            include header.jade
+            if error == null
+                h2 #{user.username}
+                p Уровень #{user.statistic.level}
+                p Опыт #{user.statistic.experience}
+                p твоя реферальная ссылка: freecodeapi-oleynalex.c9users.io/?ref=#{user.username}
+            else 
+                h2 #{error} =( 
+            
+            form(method="post" action="updateScore")
+                input(type="submit" value="Обновить счет")
+
+        div.container    
+            include footer.jade   

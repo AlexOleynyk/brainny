@@ -1,0 +1,32 @@
+html
+    title Brainy
+    include links.jade
+head
+    body
+        div.container
+            include header.jade
+            // p Custom  #[span.custom css is working] 
+            
+            if currentUser.username == ''
+
+            else
+                .row
+                    .col-xs-12
+                        h3 О проекте
+                        p. 
+                            Brainny - это тренажер для мозга, которым ты можешь воспользоваться абсолютно бесплатно.
+                            Ты можешь играть в игры, которые развивают логику, внимание, реакцию и память. 
+                            Каждый день одна из игр меняется, так что ты сможешь попробовать все игры бесплатно. 
+                        p.
+                            Если хочешь играть сразу во все игры - можешь купить доступ за brain coins, или за 10грн. 
+                            Доступ разрешает тебе играть в любые игры в любое время.
+                        include components/yandexform.html
+                
+            
+                
+            include footer.jade         
+        
+        
+       
+                    
+        script(src="js/script.js")

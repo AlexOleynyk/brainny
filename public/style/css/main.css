@@ -1,0 +1,456 @@
+/*.custom {*/
+/*    color: red;*/
+/*}*/
+.bigdiv {
+  height: 00px; }
+
+.imgmy {
+  display: block;
+  margin: 0 auto; }
+
+* {
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  color: white;
+  background: linear-gradient(135deg, #131728, #352743);
+  position: relative; }
+
+.header_conteiner {
+  height: 104px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+
+.logo_container {
+  font-size: 30px;
+  display: table;
+  height: 104px; }
+
+.logo_container a {
+  color: white;
+  font-weight: 700;
+  text-decoration: none; }
+
+.logo_container span {
+  display: table-cell;
+  vertical-align: middle; }
+
+.left_menu_container {
+  /*font-size: 36px;*/
+  display: table;
+  height: 104px; }
+
+.left_menu_container ul {
+  display: table-cell;
+  vertical-align: middle; }
+
+.left_menu_container ul li {
+  display: inline-block;
+  list-style: none;
+  padding-right: 20px; }
+
+.left_menu_container ul li a {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+  text-decoration: none; }
+
+.right_menu_container {
+  /*font-size: 36px;*/
+  width: 100%;
+  display: table;
+  height: 104px; }
+
+.right_menu_container ul {
+  display: table-cell;
+  vertical-align: middle; }
+
+.right_menu_container ul li {
+  display: inline-block;
+  list-style: none;
+  padding-right: 20px; }
+
+.right_menu_container ul li a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none; }
+
+.right_menu_container img {
+  opacity: 0.5; }
+
+.right_menu_container img:hover {
+  opacity: 1; }
+
+/*  footer    */
+.footer_conteiner {
+  margin-top: 50px;
+  height: 104px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12); }
+
+.footer_conteiner .left_menu_container {
+  width: 100%; }
+
+/*     workout      */
+.workout {
+  margin-top: 50px; }
+
+.workout_heading {
+  height: 80px; }
+  .workout_heading h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0 8px 0; }
+  .workout_heading p {
+    font-size: 18px;
+    font-weight: 100; }
+  .workout_heading .btn_block {
+    height: 100%;
+    position: relative; }
+    .workout_heading .btn_block a {
+      position: absolute;
+      top: 50%;
+      margin-top: -24px;
+      right: 0px; }
+    .workout_heading .btn_block .prize {
+      position: absolute;
+      top: 50%;
+      margin-top: -34px;
+      right: 0px; }
+      .workout_heading .btn_block .prize .prize_count {
+        display: inline-block;
+        font-size: 48px; }
+      .workout_heading .btn_block .prize .prize_text {
+        display: inline-block;
+        color: #2fb16f;
+        font-size: 18px;
+        width: 46px;
+        line-height: 16px; }
+
+.workout_body {
+  margin-top: 50px; }
+
+.primary-btn:active, .primary-btn:visited, .primary-btn:link {
+  display: inline-block;
+  background: #2fb16f;
+  margin-top: 20px;
+  padding: 14px 22px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 0 30px 0 #2fb16f;
+  transition: all 0.4s; }
+
+.primary-btn:hover {
+  text-decoration: none;
+  color: white;
+  background: #34c57c;
+  box-shadow: 0 0 30px 0 #34c57c; }
+
+/*     game preview      */
+.game_preview {
+  height: 330px;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.5s ease-in-out;
+  position: relative; }
+  .game_preview:before {
+    border-radius: 10px;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    transition: opacity 0.45s ease-in-out; }
+  .game_preview.memory_game {
+    background: linear-gradient(to top, rgba(72, 179, 254, 0.9), rgba(72, 179, 254, 0)), url(../../img/powerbrain.png);
+    background-size: cover; }
+    .game_preview.memory_game:before {
+      background: rgba(72, 179, 254, 0.9); }
+  .game_preview.logic_game {
+    background: linear-gradient(to top, rgba(47, 177, 111, 0.9), rgba(47, 177, 111, 0)), url(../../img/findpath.png);
+    background-size: cover; }
+    .game_preview.logic_game:before {
+      background: rgba(47, 177, 111, 0.9); }
+  .game_preview.attention_game {
+    background: linear-gradient(to top, rgba(224, 77, 66, 0.9), rgba(224, 77, 66, 0)), url(../../img/powerbrain.png);
+    background-size: cover; }
+    .game_preview.attention_game:before {
+      background: rgba(224, 77, 66, 0.9); }
+  .game_preview.reaction_game {
+    background: linear-gradient(to top, rgba(237, 195, 93, 0.9), rgba(237, 195, 93, 0)), url(../../img/findpath.png);
+    background-size: cover; }
+    .game_preview.reaction_game:before {
+      background: rgba(237, 195, 93, 0.9); }
+  .game_preview:hover {
+    cursor: default; }
+    .game_preview:hover:before {
+      opacity: 1; }
+    .game_preview:hover .game_info {
+      top: 70px; }
+
+.complete_game_preview {
+  height: 330px;
+  border-radius: 10px;
+  padding: 10px; }
+  .complete_game_preview.memory_game {
+    background: linear-gradient(to top, rgba(72, 179, 254, 0.9), rgba(72, 179, 254, 0.9)), url(../../img/powerbrain.png);
+    background-size: cover; }
+  .complete_game_preview.logic_game {
+    background: linear-gradient(to top, rgba(47, 177, 111, 0.9), rgba(47, 177, 111, 0.9)), url(../../img/findpath.png);
+    background-size: cover; }
+  .complete_game_preview.attention_game {
+    background: linear-gradient(to top, rgba(224, 77, 66, 0.9), rgba(224, 77, 66, 0.9)), url(../../img/powerbrain.png);
+    background-size: cover; }
+  .complete_game_preview.reaction_game {
+    background: linear-gradient(to top, rgba(237, 195, 93, 0.9), rgba(237, 195, 93, 0.9)), url(../../img/findpath.png);
+    background-size: cover; }
+  .complete_game_preview .done_wrapper {
+    transition: all 0.2s; }
+  .complete_game_preview .done_mark {
+    text-align: center;
+    margin: 80px auto;
+    opacity: 0;
+    transform: scale(0.1);
+    animation: done_mark 0.5s forwards;
+    transition: all 0.4s; }
+
+@keyframes done_mark {
+  80% {
+    opacity: 1;
+    transform: scale(1.2); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+    .complete_game_preview .done_mark span {
+      display: block;
+      margin-top: 10px; }
+  .complete_game_preview:hover {
+    cursor: default; }
+    .complete_game_preview:hover .done_wrapper {
+      transform: scale(1.1); }
+
+.game_preview .tag,
+.complete_game_preview .tag {
+  text-align: center;
+  position: relative;
+  z-index: 1; }
+  .game_preview .tag span,
+  .complete_game_preview .tag span {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #2fb16f;
+    box-shadow: 0 0 40px 0 rgba(19, 23, 40, 0.57); }
+    .game_preview .tag span.memory_game,
+    .complete_game_preview .tag span.memory_game {
+      background: #48b3fe; }
+    .game_preview .tag span.logic_game,
+    .complete_game_preview .tag span.logic_game {
+      background: #2fb16f; }
+    .game_preview .tag span.attention_game,
+    .complete_game_preview .tag span.attention_game {
+      background: #e04d42; }
+    .game_preview .tag span.reaction_game,
+    .complete_game_preview .tag span.reaction_game {
+      background: #edc35d; }
+
+.game_preview,
+.complete_game_preview {
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px 0 #131728; }
+  .game_preview .game_info,
+  .complete_game_preview .game_info {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 260px;
+    transition: all 0.5s; }
+    .game_preview .game_info .game_heading h4,
+    .complete_game_preview .game_info .game_heading h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 0; }
+    .game_preview .game_info .game_heading span,
+    .complete_game_preview .game_info .game_heading span {
+      font-size: 16px;
+      font-weight: 300; }
+  .game_preview .game_decription,
+  .complete_game_preview .game_decription {
+    margin-top: 20px;
+    padding: 0 15px; }
+    .game_preview .game_decription p,
+    .complete_game_preview .game_decription p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 25px; }
+
+/* games.jade  */
+.game_container {
+  min-height: 600px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-bottom: 20px; }
+
+.game_intro,
+.game_results {
+  padding: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: blockAppearence 0.5s forwards; }
+  .game_intro.hide_intro,
+  .game_results.hide_intro {
+    opacity: 1;
+    display: block;
+    animation: gameIntroHide 0.5s forwards; }
+  .game_intro.hide_results,
+  .game_results.hide_results {
+    opacity: 0;
+    display: none; }
+
+@keyframes gameIntroHide {
+  100% {
+    opacity: 0; } }
+
+@keyframes blockAppearence {
+  100% {
+    opacity: 1; } }
+  .game_intro .tag,
+  .game_results .tag {
+    text-align: center;
+    position: relative;
+    z-index: 1; }
+    .game_intro .tag span,
+    .game_results .tag span {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: #2fb16f;
+      box-shadow: 0 0 40px 0 rgba(19, 23, 40, 0.57); }
+      .game_intro .tag span.memory_game,
+      .game_results .tag span.memory_game {
+        background: #48b3fe; }
+      .game_intro .tag span.logic_game,
+      .game_results .tag span.logic_game {
+        background: #2fb16f; }
+      .game_intro .tag span.attention_game,
+      .game_results .tag span.attention_game {
+        background: #e04d42; }
+      .game_intro .tag span.reaction_game,
+      .game_results .tag span.reaction_game {
+        background: #edc35d; }
+  .game_intro .game_heading h4,
+  .game_results .game_heading h4 {
+    font-size: 40px; }
+  .game_intro .game_heading span,
+  .game_results .game_heading span {
+    font-size: 20px; }
+  .game_intro .game_info,
+  .game_results .game_info {
+    margin: 20px; }
+
+/*    popover  message   */
+.popup_container {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5; }
+  .popup_container .popup_message {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+    .popup_container .popup_message.popup_hidden {
+      opacity: 0;
+      display: none; }
+    .popup_container .popup_message .prize .prize_count {
+      display: inline-block;
+      font-size: 48px; }
+    .popup_container .popup_message .prize .prize_text {
+      display: inline-block;
+      color: #2fb16f;
+      font-size: 18px;
+      width: 46px;
+      line-height: 16px; }
+
+/* power brain */
+.main_game_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: mainGameWrapperAppearence 0.5s forwards 0.5s; }
+
+@keyframes mainGameWrapperAppearence {
+  1% {
+    display: block; }
+  100% {
+    opacity: 1; } }
+  .main_game_wrapper.myHidden {
+    display: none;
+    opacity: 0; }
+
+.cell {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 50px;
+  text-align: center;
+  transform: scale(0.1);
+  animation: cellApperence 0.1s ease-in-out forwards; }
+
+@keyframes cellApperence {
+  100% {
+    transform: scale(1); } }
+  .cell.active {
+    background: #48b3fe; }
+  .cell.flip.active {
+    background: white;
+    animation: activeFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes activeFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #48b3fe; }
+  100% {
+    background: #48b3fe;
+    transform: rotateY(0deg); } }
+  .cell.flip.fail {
+    background: white;
+    animation: failFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes failFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #e04d42; }
+  100% {
+    background: #e04d42;
+    transform: rotateY(0deg); } }

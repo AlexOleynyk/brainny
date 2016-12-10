@@ -1,0 +1,99 @@
+html
+    title Brainy
+    include links.jade
+head
+    body
+        div.container
+            include header.jade
+            // p Custom  #[span.custom css is working] 
+            
+            if currentUser.username == 'PlayUA'
+                p странный у тебя пароль
+                
+            if currentUser.username == ''
+                // hr 
+                div.row
+                    div.col-md-6
+                        h2 Регистрация
+                        form(method="post" action="adduser")
+                            div.form-group
+                                input.form-control(type="email" name="email" placeholder="Email" required)
+                            div.form-group
+                                input.form-control(type="text" name="username" placeholder="Username" required)
+                            div.form-group
+                                input.form-control(type="password" name="password" placeholder="password" required)
+                            div.form-group
+                                input.btn.btn-default(type="submit")
+                    div.col-md-6           
+                        h2 Логин
+                        form(method="post" action="login")
+                            if error == 404  
+                                p Пользователь с таким именем не найден
+                            if error == 401
+                                p Пароль указан неверно
+                            div.form-group
+                                input.form-control(type="text" name="username" placeholder="Username" required)
+                            div.form-group
+                                input.form-control(type="password" name="password" placeholder="password" required)
+                            div.form-group
+                                input.btn.btn-default(type="submit" value="Войти")
+            else
+                include components/main_workout.jade
+                include components/daily.jade
+                
+            
+                
+            include footer.jade         
+        
+        
+        script.
+            var notificationsArray = !{JSON.stringify(messages)};
+        
+        if currentUser.username != '' && messages.length > 0
+            .popup_container
+                - each item, index in messages
+                    if messages.length == 1
+                        .popup_message.text-center
+                            img(src="img/#{item.image}")
+                            h2 #{item.title}
+                            p  #{item.text}
+                            if item.prize
+                                .prize
+                                    span.prize_count +#{item.prize}
+                                    span.prize_text brain coins
+                            a.primary-btn.close_notifications(href='#')  #{item.buttonText}
+                    else    
+                        if index == 0
+                            .popup_message.text-center
+                                -//тут можно поставить дефолтнуб картинку если нет никакой в самом объекте
+                                
+                                img(src="img/#{item.image}")
+                                h2 #{item.title}
+                                p  #{item.text}
+                                if item.prize
+                                .prize
+                                    span.prize_count +#{item.prize}
+                                    span.prize_text brain coins
+                                a.primary-btn.next_notification(href='#')  #{item.buttonText}
+                        else if index < messages.length - 1
+                            .popup_message.text-center.popup_hidden
+                                img(src="img/#{item.image}")
+                                h2 #{item.title}
+                                p  #{item.text} 
+                                if item.prize
+                                .prize
+                                    span.prize_count +#{item.prize}
+                                    span.prize_text brain coins
+                                a.primary-btn.next_notification(href='#')  #{item.buttonText}
+                        else 
+                            .popup_message.text-center.popup_hidden
+                                img(src="img/#{item.image}")
+                                h2 #{item.title}
+                                p  #{item.text}
+                                if item.prize
+                                .prize
+                                    span.prize_count +#{item.prize}
+                                    span.prize_text brain coins
+                                a.primary-btn.close_notifications(href='#')  #{item.buttonText}
+                    
+        script(src="js/script.js")
