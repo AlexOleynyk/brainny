@@ -362,7 +362,8 @@ app.get('/', (req, res) => {
         username: ''
       },
       error: req.session.error,
-      ref: req.query.ref || null
+      ref: req.query.ref || null,
+      emailreg: req.query.emailreg || null
     });
   }
   // res.status(200).send();
@@ -711,7 +712,7 @@ app.post('/invitefriend', function(req, res) {
     '</tr>  <tr> <td><p>Пользователь '+ req.session.user.username +' приглашает тебя тренировать мозг в сервисе Brainny. <br> Ты можешь зарегистрироваться нажав на кнопку ниже: </p></td>'+
     '</tr>  <tr>    <td>      <a class="btn" style="background: #2fb16f;    display: inline-block;    margin-top: 20px; margin-bottom: 50px;' + 
     'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;'+
-    'box-shadow: 0 0 30px 0 #2fb16f;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '"> Зарегистрироваться </a>    </td>  </tr></table>'        // html body 
+    'box-shadow: 0 0 30px 0 #2fb16f;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '&emailreg='+req.body.email+'"> Зарегистрироваться </a>    </td>  </tr></table>'        // html body 
       };
 
       // send mail with defined transport object 
