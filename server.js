@@ -176,12 +176,12 @@ app.post('/adduser', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
+  var ref = req.body.ref || null;
 
   var games = {}
 
   for (var gameCategory in allGames) {
     allGames[gameCategory].map(function(item) {
-
       games[item.game] = {
         difficulty: 1
       }
@@ -191,6 +191,7 @@ app.post('/adduser', function(req, res) {
   var newUser = new userSchema({
     username: username,
     password: password,
+    ref: ref,
     email: email,
     braincoins: 50,
     games: games
@@ -332,7 +333,7 @@ app.get('/', (req, res) => {
 
   if (req.session.user != null) {
     var user = req.session.user;
-
+    
     userSchema.findOne({
       username: user.username
     }, function(err, findedUser) {
@@ -360,7 +361,8 @@ app.get('/', (req, res) => {
       currentUser: {
         username: ''
       },
-      error: req.session.error
+      error: req.session.error,
+      ref: req.query.ref || null
     });
   }
   // res.status(200).send();
@@ -698,7 +700,7 @@ app.post('/invitefriend', function(req, res) {
       to: req.body.email, // list of receivers 
       subject: 'Приглашение в Brainny', // Subject line 
       text: 'Привет', // plaintext body 
-      html: '<b>Привет!/b> <br> <p> Пользователь ' + req.session.user.username + 'приглашает тебя тренировать мозг  сервисе Brainny. Ты моешь зарегестрироваться по этой ссылке <a href="brainny.herokuapp.com?ref='+req.session.user.username+'">Зарегестрироваться</a>.</p>' // html body 
+      html: '<b>Привет!</b> <br> <p> Пользователь ' + req.session.user.username + ' приглашает тебя тренировать мозг в сервисе Brainny. Ты можешь зарегистрироваться по этой ссылке <a href="brainny.herokuapp.com?ref=' + req.session.user.username + '">Зарегестрироваться</a>.</p>' // html body 
     };
 
     // send mail with defined transport object 
@@ -707,6 +709,26 @@ app.post('/invitefriend', function(req, res) {
         return console.log(error);
       }
       console.log('Message sent: ' + info.response);
+
+      userSchema.findOne({
+        username: req.session.user.username
+      }, function(err, findedUser) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          findedUser.messages.push({
+
+            title: 'Сообщение тправлено',
+            text: 'Ты отправил приглашение на адрес ' + req.body.email + '. Когда твой друг достигнет пятого уровня вы оба получите награду.',
+            image: 'complete-game.png',
+            buttonText: 'Хорошо',
+          });
+          
+          findedUser.save();
+        }
+      });
+
       res.redirect('/');
     });
   }
