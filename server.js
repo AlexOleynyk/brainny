@@ -702,7 +702,7 @@ app.post('/invitefriend', function(req, res) {
         text: 'Привет', // plaintext body 
         html: '<b>Привет!</b> <br> <p> Пользователь ' + req.session.user.username + ' приглашает'+
         ' тебя тренировать мозг в сервисе Brainny. Ты можешь зарегистрироваться по этой ссылке '+
-        '<a href="brainny.herokuapp.com?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
+        '<a href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
         '<p>Если с ссылкой что-то не так, просто скопируй этот адрес и вставь его в адресную строку браузера: </p>' + 
         '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'
         // html body 
