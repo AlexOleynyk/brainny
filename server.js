@@ -704,7 +704,7 @@ app.post('/invitefriend', function(req, res) {
         ' тебя тренировать мозг в сервисе Brainny. Ты можешь зарегистрироваться по этой ссылке '+
         '<a href="brainny.herokuapp.com?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
         '<p>Если с ссылкой что-то не так, просто скопируй этот адрес и вставь его в адресную строку браузера: </p>' + 
-         + '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'
+        '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'
         // html body 
       };
 
