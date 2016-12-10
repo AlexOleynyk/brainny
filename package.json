@@ -19,6 +19,7 @@
     "mailgun-js": "^0.7.14",
     "mongodb": "^2.2.11",
     "mongoose": "^4.7.1",
-    "node-sass-middleware": "^0.10.0"
+    "node-sass-middleware": "^0.10.0",
+    "nodemailer": "^2.7.0"
   }
 }
