@@ -689,48 +689,54 @@ app.get('/sendmail', function(req, res) {
 app.post('/invitefriend', function(req, res) {
 
   var nodemailer = require('nodemailer');
+  if (req.session.user) {
+    if (req.body.email) {
+      // create reusable transporter object using the default SMTP transport 
+      var transporter = nodemailer.createTransport('smtps://oleynalex%40yandex.ru:1h%40v3100k@smtp.yandex.ru');
 
-  if (req.body.email) {
-    // create reusable transporter object using the default SMTP transport 
-    var transporter = nodemailer.createTransport('smtps://oleynalex%40yandex.ru:1h%40v3100k@smtp.yandex.ru');
+      // setup e-mail data with unicode symbols 
+      var mailOptions = {
+        from: '"Brainny - сервис тренировка мозга" <oleynalex@yandex.ru>', // sender address 
+        to: req.body.email, // list of receivers 
+        subject: 'Приглашение в Brainny', // Subject line 
+        text: 'Привет', // plaintext body 
+        html: '<b>Привет!</b> <br> <p> Пользователь ' + req.session.user.username + ' приглашает'+
+        ' тебя тренировать мозг в сервисе Brainny. Ты можешь зарегистрироваться по этой ссылке '+
+        '<a href="brainny.herokuapp.com?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
+        '<p>Если с ссылкой что-то не так, просто скопируй этот адрес и вставь его в адресную строку браузера: </p>' + 
+         + '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'
+        // html body 
+      };
 
-    // setup e-mail data with unicode symbols 
-    var mailOptions = {
-      from: '"Fred Foo 👥" <oleynalex@yandex.ru>', // sender address 
-      to: req.body.email, // list of receivers 
-      subject: 'Приглашение в Brainny', // Subject line 
-      text: 'Привет', // plaintext body 
-      html: '<b>Привет!</b> <br> <p> Пользователь ' + req.session.user.username + ' приглашает тебя тренировать мозг в сервисе Brainny. Ты можешь зарегистрироваться по этой ссылке <a href="brainny.herokuapp.com?ref=' + req.session.user.username + '">Зарегестрироваться</a>.</p>' // html body 
-    };
-
-    // send mail with defined transport object 
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: ' + info.response);
-
-      userSchema.findOne({
-        username: req.session.user.username
-      }, function(err, findedUser) {
-        if (err) {
-          console.log(err);
+      // send mail with defined transport object 
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          return console.log(error);
         }
-        else {
-          findedUser.messages.push({
+        console.log('Message sent: ' + info.response);
 
-            title: 'Сообщение тправлено',
-            text: 'Ты отправил приглашение на адрес ' + req.body.email + '. Когда твой друг достигнет пятого уровня вы оба получите награду.',
-            image: 'complete-game.png',
-            buttonText: 'Хорошо',
-          });
-          
-          findedUser.save();
-        }
+        userSchema.findOne({
+          username: req.session.user.username
+        }, function(err, findedUser) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            findedUser.messages.push({
+
+              title: 'Сообщение тправлено',
+              text: 'Ты отправил приглашение на адрес ' + req.body.email + '. Когда твой друг достигнет пятого уровня вы оба получите награду.',
+              image: 'complete-game.png',
+              buttonText: 'Хорошо',
+            });
+
+            findedUser.save();
+          }
+        });
+
+        res.redirect('/');
       });
-
-      res.redirect('/');
-    });
+    }
   }
   else {
     res.redirect('/');
