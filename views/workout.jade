@@ -2,7 +2,9 @@ html
     head
         title Workout
         include links.jade
-    
+        - var game = workout.game
+        
+        link(rel="stylesheet"  href="style/css/#{game}.css")
     body
         div.container
             include header.jade
@@ -21,7 +23,7 @@ html
         
             script.
                 var user = "#{currentUser.username}", 
-                     workoutJS = "#{workout.title}"; 
+                     gameTitle = "#{workout.game}"; 
                      
                 var levelParam = #{levelParam};    // ставить из базы сложность
 

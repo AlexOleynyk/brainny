@@ -1,15 +1,21 @@
 module.exports = [{
     title: "Вот так просто",
     game: "power_brain",
-    description: "Просто пройди игру, этого будет достаточно чтобы заработать немного монет)",
+    description: "Просто пройди игру Power Brain, этого будет достаточно чтобы заработать немного монет)",
     prize: 15,
-    cryteria: null
+    cryteria: true
 }, {
-    title: "Сам дурак",
-    game: "find_path",
-    description: "Дурацкое описание Задания",
+    title: "Набираем высоту",
+    game: "airplanes",
+    description: "Дать минимум 50 правильных ответов в игре.",
     prize: 27,
-    cryteria: null
+    cryteria: "levels - errors >= 50"
+}, {
+    title: "Безошибочный",
+    game: "fast_math",
+    description: "Не допустить ни одной ошибки в игре Математик.",
+    prize: 27,
+    cryteria: "errors == 0"
 }, {
     title: "Дуэлянт",
     game: "duel",
@@ -39,5 +45,6 @@ module.exports = [{
     game: "main",
     description: "Ты достиг 5 уровня: ты и друг, тебя пригласивший, получаете по 150 brain coins",
     prize: 150,
+    unique: "findedUser.payment += 30", // сделать в некоторых случаях допольнительные штукиЮ кроме приза-монеток
     cryteria: "userOld.statistic.level == 4 && findedUser.statistic.level == 5 && findedUser.ref"
 }];

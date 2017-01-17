@@ -64,7 +64,7 @@ var variables = require('./data/variables.js');
 
 app.get('*', function(req, res, next) {
   var lastDate = new Date(Date.now()).getDate();
-  
+
   // Обработка загрузчика иконки сайта
   if (req.url === '/favicon.ico') {
     res.writeHead(200, {
@@ -97,6 +97,7 @@ app.get('*', function(req, res, next) {
           var userGames = findedUser.games;
           findedUser.completeDailyQuest = false;
           findedUser.completeDailyWorkout = false;
+          findedUser.dailyWorkout = 0;
 
           for (var gameCategory in allGames) {
             allGames[gameCategory].map(function(item) {
@@ -333,7 +334,7 @@ app.get('/', (req, res) => {
 
   if (req.session.user != null) {
     var user = req.session.user;
-    
+
     userSchema.findOne({
       username: user.username
     }, function(err, findedUser) {
@@ -347,6 +348,46 @@ app.get('/', (req, res) => {
         var messages = findedUser.messages;
 
         res.render('index.jade', {
+          currentUser: findedUser,
+          workout: dailyWorkout,
+          daily: daily,
+          messages: messages
+        });
+      }
+
+    });
+  }
+  else {
+    res.render('index.jade', {
+      currentUser: {
+        username: ''
+      },
+      error: req.session.error,
+      ref: req.query.ref || null,
+      emailreg: req.query.emailreg || null
+    });
+  }
+  // res.status(200).send();
+})
+
+app.get('/later', (req, res) => {
+
+  if (req.session.user != null) {
+    var user = req.session.user;
+
+    userSchema.findOne({
+      username: user.username
+    }, function(err, findedUser) {
+
+      if (err) {
+        console.log(err);
+        res.status(404).send(err);
+      }
+      else {
+        req.session.user = findedUser;
+        var messages = findedUser.messages;
+
+        res.render('later.jade', {
           currentUser: findedUser,
           workout: dailyWorkout,
           daily: daily,
@@ -417,9 +458,16 @@ app.get('/workout', function(req, res) {
       }
       else {
         var workout = dailyWorkout[+findedUser.dailyWorkout];
+        // var gameAchivments = allAchivments.filter(function(item) {
+        //   return (item.game == workout.game);
+        // })
+
+        var userAchivments = findedUser.achivments;
         var gameAchivments = allAchivments.filter(function(item) {
-          return (item.game == workout.game);
-        })
+          return (item.game == workout.game && userAchivments.indexOf(item.title) == -1);
+        });
+        
+        console.log(gameAchivments);
 
         res.render('workout.jade', {
           currentUser: findedUser,
@@ -449,12 +497,12 @@ app.get('/workout_check', function(req, res) {
         res.status(404).send();
       }
       else {
-        
+
         // копирование объекта для проверки достижений
         var oldStringUser = JSON.stringify(findedUser)
         var userOld = JSON.parse(oldStringUser);
-        
-        
+
+
         var workout = findedUser.dailyWorkout;
         // обновление информации игрока
         if (workout > dailyWorkout.length - 2) {
@@ -485,46 +533,48 @@ app.get('/workout_check', function(req, res) {
               difficulty: +difficulty
             }
           }
-          
-          
+
+
           findedUser.games = games;
-         
-          
-          
+
         }
-        
+
         // расчета уровная и опыта юзера
         var levels = req.query.levels || 1;
         var errors = req.query.errors || levels;
         var difficulty = req.query.difficulty || 1;
-        
-        var exp = Math.floor(difficulty/(0.1*findedUser.statistic.level*(errors+1)) + 5);
-        
-        var level = Math.floor(Math.sqrt(findedUser.statistic.experience+exp)/10) + 1;
-        
+
+        var exp = Math.floor(difficulty / (0.1 * findedUser.statistic.level * (errors + 1)) + 5);
+
+        var level = Math.floor(Math.sqrt(findedUser.statistic.experience + exp) / 10) + 1;
+
         var coins = (levels - errors) || 0;
         console.log('level ' + level + ' exp ' + exp);
-        
+
         findedUser.statistic.level = level;
         findedUser.statistic.experience += exp;
-        
+
         console.log(findedUser.statistic);
 
-        
-        
+
+
         findedUser.markModified('games');
         findedUser.markModified('statistic');
         findedUser.braincoins += coins;
-        
+
         findedUser.dailyWorkout = workout;
 
 
 
 
         // проверка выполнения всех достижений основанных на статистике
+
+
         var mainAchivments = allAchivments.filter(function(item) {
           return item.game == 'main';
         });
+
+
 
         mainAchivments.map(function(item) {
           var cryteria = item.cryteria;
@@ -540,15 +590,18 @@ app.get('/workout_check', function(req, res) {
               buttonText: 'Супер!',
               prize: item.prize
             });
-            
-            
+
+
             // проверка на совместные достижения: реферал получил 5 уровень
-            if (item.title == 'Лучший друг'){
-              userSchema.findOne({username: findedUser.ref}, function(err, refUser){
-                if (err){
+            if (item.title == 'Лучший друг') {
+              userSchema.findOne({
+                username: findedUser.ref
+              }, function(err, refUser) {
+                if (err) {
                   console.log(err);
-                  
-                } else {
+
+                }
+                else {
                   refUser.messages.push({
                     title: item.title,
                     text: findedUser.username + ' достиг 5 уровня! Вы оба получаете награду',
@@ -562,17 +615,77 @@ app.get('/workout_check', function(req, res) {
                 }
               })
             }
-            
-            
+
+
             findedUser.braincoins += item.prize;
             findedUser.markModified('messages');
           }
         });
-        
+
+        // проверка выполнения всех достижений основанных на конкретной игре
+
+        var gameTitle = req.query.game || null;
+        var userAchivments = findedUser.achivments;
+        var gameAchivments = allAchivments.filter(function(item) {
+          return (item.game == gameTitle && userAchivments.indexOf(item.title) == -1);
+        });
+        console.log(gameAchivments);
+
+
+
+        gameAchivments.map(function(item) {
+          var cryteria = item.cryteria;
+          console.log(cryteria);
+          //console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
+          // проверка выполнения условия в формате "значение до" - "значение после"
+          if (eval(cryteria)) {
+            console.log(findedUser.username + ' - ' + item.title + ': achive complete!');
+            findedUser.messages.push({
+              title: item.title,
+              text: item.description,
+              image: 'complete-game.png',
+              buttonText: 'Супер!',
+              prize: item.prize
+            });
+            findedUser.achivments.push(item.title);
+            findedUser.braincoins += item.prize;
+            findedUser.markModified('messages');
+            findedUser.markModified('achivments');
+          }
+        });
+
+
+
+
+
+        // проверка ежедневного задания
+        var dailyAchivment = daily;
+        if (dailyAchivment && !findedUser.completeDailyQuest) {
+          var cryteria = dailyAchivment.cryteria;
+          console.log(cryteria);
+          //console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
+          // проверка выполнения условия в формате "значение до" - "значение после"
+          if (eval(cryteria)) {
+            console.log(findedUser.username + ' - ' + dailyAchivment.title + ': achive complete!');
+            findedUser.messages.push({
+              title: 'Ежедневное задание выполнено!',
+              text: dailyAchivment.description,
+              image: 'complete-game.png',
+              buttonText: 'Супер!',
+              prize: dailyAchivment.prize
+            });
+            //findedUser.achivments.push(dailyAchivment.title);
+            findedUser.braincoins += dailyAchivment.prize;
+            findedUser.markModified('messages');
+            findedUser.completeDailyQuest = true;
+            //findedUser.markModified('achivments');
+          }
+        }
+
         // var workoutsComplete = findedUser.statistic.workoutsComplete;
         // var cryteria = "workoutsComplete == 0";
         // сохранение в базу обновленной информации
-        
+
         findedUser.save(function(err, savedUser) {
           if (err) {
             console.log(err);
@@ -642,7 +755,7 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/sendmail', function(req, res) {
-  
+
   var nodemailer = require('nodemailer');
 
   // create reusable transporter object using the default SMTP transport 
@@ -706,13 +819,13 @@ app.post('/invitefriend', function(req, res) {
         // '<a href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '" style="color: #2B223B"> Зарегестрироваться </a>.</p>' +
         // '<p>Если с ссылкой что-то не так, просто скопируй этот адрес и вставь его в адресную строку браузера: </p>' + 
         // '<p> brainny.herokuapp.com?ref=' + req.session.user.username + '</p>'   // html body 
-        html: '<table cellpadding="20" style="   font-family: sans-serif;    line-height: 28px;    background: #342642;    color: white;    width: 100%;'+
-    'text-align: center;    padding: 50px; ">  <tr>'+
-    '<td><h2>Привет</h2></td>'+
-    '</tr>  <tr> <td><p>Пользователь '+ req.session.user.username +' приглашает тебя тренировать мозг в сервисе Brainny. <br> Ты можешь зарегистрироваться нажав на кнопку ниже: </p></td>'+
-    '</tr>  <tr>    <td>      <a class="btn" style="background: #2fb16f;    display: inline-block;    margin-top: 20px; margin-bottom: 50px;' + 
-    'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;'+
-    'box-shadow: 0 0 30px 0 #2fb16f;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '&emailreg='+req.body.email+'"> Зарегистрироваться </a>    </td>  </tr></table>'        // html body 
+        html: '<table cellpadding="20" style="   font-family: sans-serif;    line-height: 28px;    background: #342642;    color: white;    width: 100%;' +
+          'text-align: center;    padding: 50px; ">  <tr>' +
+          '<td><h2>Привет</h2></td>' +
+          '</tr>  <tr> <td><p>Пользователь ' + req.session.user.username + ' приглашает тебя тренировать мозг в сервисе Brainny. <br> Ты можешь зарегистрироваться нажав на кнопку ниже: </p></td>' +
+          '</tr>  <tr>    <td>      <a class="btn" style="background: #2fb16f;    display: inline-block;    margin-top: 20px; margin-bottom: 50px;' +
+          'padding: 14px 22px;    color: white;    text-transform: uppercase;    border-radius: 50px;    text-decoration: none;' +
+          'box-shadow: 0 0 30px 0 #2fb16f;" href="http://brainny.herokuapp.com/?ref=' + req.session.user.username + '&emailreg=' + req.body.email + '"> Зарегистрироваться </a>    </td>  </tr></table>' // html body 
       };
 
       // send mail with defined transport object 
@@ -765,10 +878,18 @@ app.get('/:username', (req, res) => {
         }
         else {
           if (findedUser) {
+            
+            var userAchivments = findedUser.achivments;
+            var filteredUserAchivments = allAchivments.filter(function(item) {
+              return (userAchivments.indexOf(item.title) != -1);
+            });
+            
+            
             res.render('profile.jade', {
               currentUser: user,
               user: findedUser,
-              isMyProfile: false
+              isMyProfile: false,
+              achivments: filteredUserAchivments
             })
           }
 
@@ -787,11 +908,17 @@ app.get('/:username', (req, res) => {
         }
         else {
           if (findedUser) {
+            var userAchivments = findedUser.achivments;
+            var filteredUserAchivments = allAchivments.filter(function(item) {
+              return (userAchivments.indexOf(item.title) != -1);
+            });
+            
             //console.log('here 1');
             res.render('profile.jade', {
               currentUser: user,
               user: findedUser,
-              isMyProfile: false
+              isMyProfile: false,
+              achivments: filteredUserAchivments
             })
           }
           else {

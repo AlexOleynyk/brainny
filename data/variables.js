@@ -1,1 +1,1 @@
-module.exports = {"lastDailyDate":10}
+module.exports = {"lastDailyDate":17}

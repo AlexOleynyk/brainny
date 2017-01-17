@@ -1,12 +1,12 @@
 // if currentUser.completeDailyQuest == false
 .workout
     .row.workout_heading
-        .col-xs-6
+        .col-xs-4.col-xs-offset-2
             .text_block    
                 h3  #{achive.title}
                 p #{achive.description}
 
-        .col-xs-3
+        .col-xs-4
             .btn_block
                 .prize
                     span.prize_count +#{achive.prize}
@@ -14,7 +14,5 @@
                         
                         
                 
-        .col-xs-3
-            .btn_block
-                a.primary-btn(href="/workout") Выполнить
+        
         

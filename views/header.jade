@@ -7,11 +7,11 @@ div.row.header_conteiner
             .left_menu_container
                 ul
                     li #[a(href="/games") Игры]
-                    li #[a(href="#") Дуэли]
+                    li #[a(href="/later") Дуэли]
         .col-xs-6
             .right_menu_container.text-right
                 ul.text-right
-                    li #[a(href="#") #{currentUser.braincoins} bc]
+                    li #[a(href="/later") #{currentUser.braincoins} bc]
                     li #[a(href="#{currentUser.username}") #{currentUser.username} ]
                     li #[a(href="logout") #[img(src="img/log-out.png")]]
     else

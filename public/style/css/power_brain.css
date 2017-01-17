@@ -1,0 +1,66 @@
+/* power brain */
+.main_game_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: mainGameWrapperAppearence 0.5s forwards 0.5s; }
+
+@keyframes mainGameWrapperAppearence {
+  1% {
+    display: block; }
+  100% {
+    opacity: 1; } }
+  .main_game_wrapper.myHidden {
+    display: none;
+    opacity: 0; }
+
+.cell {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 50px;
+  text-align: center;
+  transform: scale(0.1);
+  animation: cellApperence 0.1s ease-in-out forwards; }
+
+@keyframes cellApperence {
+  100% {
+    transform: scale(1); } }
+  .cell.active {
+    background: #48b3fe; }
+  .cell.flip.active {
+    background: white;
+    animation: activeFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes activeFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #48b3fe; }
+  100% {
+    background: #48b3fe;
+    transform: rotateY(0deg); } }
+  .cell.flip.fail {
+    background: white;
+    animation: failFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes failFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #e04d42; }
+  100% {
+    background: #e04d42;
+    transform: rotateY(0deg); } }

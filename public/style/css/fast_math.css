@@ -1,0 +1,151 @@
+/* power brain */
+.game_process_info {
+  position: absolute;
+  width: 100%; }
+
+.game_progress {
+  height: 5px;
+  width: 100%; }
+  .game_progress .game_progress_done {
+    height: 100%;
+    width: 0%;
+    background: #2fb16f;
+    transition: width 1s linear; }
+
+.main_game_wrapper {
+  position: relative;
+  width: 100%;
+  height: 595px;
+  animation: mainGameWrapperAppearence 0.5s forwards 0.5s; }
+
+@keyframes mainGameWrapperAppearence {
+  1% {
+    display: block; }
+  100% {
+    opacity: 1; } }
+  .main_game_wrapper.myHidden {
+    display: none;
+    opacity: 0; }
+
+.main_game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.board {
+  position: relative;
+  text-align: center; }
+
+.helpers .score {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  padding-top: 30px;
+  transform: translate(-50%, 0%); }
+
+.helpers .left {
+  opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  padding-left: 20px;
+  transform: translate(0, -50%); }
+  .helpers .left img {
+    padding-right: 20px; }
+
+.helpers .right {
+  opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  padding-right: 20px;
+  transform: translate(0, -50%); }
+  .helpers .right img {
+    padding-left: 20px; }
+
+.card {
+  font-size: 26px;
+  background: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  color: #131728;
+  position: relative;
+  box-shadow: 0 0 10px 0 #131728;
+  transition: all 0.4s; }
+  .card:first-of-type {
+    z-index: 10;
+    transform: translate(0%, 0%) scale(1); }
+  .card:nth-of-type(2) {
+    z-index: 9;
+    transform: translate(0%, -70%) scale(0.9); }
+  .card.good {
+    color: white;
+    background: rgba(47, 177, 111, 0.9); }
+  .card.bad {
+    color: white;
+    background: rgba(224, 77, 66, 0.9); }
+  .card.move_left {
+    animation: moveLeft 0.4s; }
+
+@keyframes moveLeft {
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0; } }
+  .card.move_right {
+    animation: moveRight 0.4s; }
+
+@keyframes moveRight {
+  100% {
+    transform: translate(50%, 0);
+    opacity: 0; } }
+
+.cell {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 50px;
+  text-align: center;
+  transform: scale(0.1);
+  animation: cellApperence 0.1s ease-in-out forwards; }
+
+@keyframes cellApperence {
+  100% {
+    transform: scale(1); } }
+  .cell.active {
+    background: #48b3fe; }
+  .cell.flip.active {
+    background: white;
+    animation: activeFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes activeFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #48b3fe; }
+  100% {
+    background: #48b3fe;
+    transform: rotateY(0deg); } }
+  .cell.flip.fail {
+    background: white;
+    animation: failFlip 0.4s forwards ease-in-out;
+    transform: rotateY(-180deg); }
+
+@keyframes failFlip {
+  0% {
+    transform: rotateY(-180deg); }
+  49% {
+    background: white; }
+  50% {
+    background: #e04d42; }
+  100% {
+    background: #e04d42;
+    transform: rotateY(0deg); } }

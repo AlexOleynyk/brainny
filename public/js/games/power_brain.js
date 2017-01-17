@@ -173,7 +173,7 @@ $(document).ready(function() {
                 
                 // Установка ссылки на кнопку 
                 $('#nextGame').click(function(){
-        location.href = '/workout_check?errors='+ errors + '&difficulty=' + levelParam+ '&levels=' + levels;
+        location.href = '/workout_check?errors='+ errors + '&difficulty=' + levelParam+ '&levels=' + levels + '&game=' + gameTitle;
         // setTimeout(startGame, 1000);
         
     })

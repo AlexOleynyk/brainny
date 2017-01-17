@@ -1,1 +1,1 @@
-module.exports = {"game":"power_brain","description":"Вот тебе просто смайлик ☺","prize":18,"cryteria":null}
+module.exports = {"game":"power_brain","description":"Просто пройди игру Power Brain, этого будет достаточно чтобы заработать немного монет)","prize":15,"cryteria":"gameTitle == 'power_brain'"}

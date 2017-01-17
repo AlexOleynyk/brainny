@@ -11,8 +11,12 @@
             case workout.game
                 when 'power_brain'
                     include ../games/power_brain.jade
-                when 'find_path'
-                    include ../games/find_path.jade
+                when 'figure_cyclon'
+                    include ../games/figure_cyclon.jade
+                when 'airplanes'
+                    include ../games/airplanes.jade
+                when 'fast_math'
+                    include ../games/fast_math.jade
                 default
                     include error.jade
                     - console.log('"Игры с таким именен нет"')
@@ -49,8 +53,7 @@ if achivments.length != 0
     script. 
         var achivments = !{JSON.stringify(achivments)}
     
-    - each achive in achivments
+    each achive in achivments
         include achivments.jade
         
-    
 -//script(src="js/gameButtonsHandler.js")

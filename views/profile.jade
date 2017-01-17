@@ -7,21 +7,85 @@ head
             include header.jade
             if error == null
                 h2 #{user.username}
-                p Уровень #{user.statistic.level}
-                p Опыт #{user.statistic.experience}
-                p твоя реферальная ссылка: freecodeapi-oleynalex.c9users.io/?ref=#{user.username}
-                p Или можешь пригласить друзей по почте
                 
-                .row
-                    form(method="post" action="invitefriend")
-                            div.form-group.col-md-6
-                                input.form-control(type="email" name="email" placeholder="Email" required)
-                            div.form-group.col-md-6
-                                input.btn.btn-default(type="submit" value="Пригласить")
+              
+                .profileBlockWrapper    
+                    h3 Прогресс
+                    
+                    - var level = user.statistic.level;
+                                
+                    - var nextExperience = Math.pow((level)*10, 2); 
+                    - var prevExperience = Math.pow(--level*10, 2); 
+                    - var step = (nextExperience - prevExperience)/100;
+                    - var expToNextLevel = (nextExperience - user.statistic.experience);
+                    - var width = (user.statistic.experience-prevExperience)/step;
+                    -// console.log(nextExperience, prevExperience, user.statistic.experience, step, width)
+                
+                
+                    .row
+                        .col-md-3
+                            p Уровень #{user.statistic.level}
+                        .col-md-2
+                            p Опыт #{user.statistic.experience}
+                        .col-md-3
+                            p До следующего уровня #{expToNextLevel}
+                    .row
+                        .col-xs-12
+                            .progressBarProfile
+                               
+                                - //var level = Math.floor(Math.sqrt(user.statistic.experience) / 10) + 1;
+    
+                                .progressDoneProfile(style="width:#{width}%")
+                
+                hr.separateLine
+                
+                .profileBlockWrapper    
+                    h3 Статистика
+                    .row
+                        .col-md-4
+                            .stat_block
+                                .prize
+                                    span.prize_count #{user.statistic.workoutsComplete}
+                                    span.prize_text Тренировок пройдено
+                        .col-md-4
+                            .stat_block
+                                .prize
+                                    span.prize_count #{user.statistic.experience}
+                                    span.prize_text Очков опыта
+                        .col-md-4
+                            .stat_block
+                                .prize
+                                    span.prize_count #{user.statistic.level}
+                                    span.prize_text Уровень в игре
+                 
+                hr.separateLine
+                                
+                .profileBlockWrapper    
+                    h3 Достижения
+                    each achive in achivments
+                        include components/achivments_simple.jade
+                        include components/achivments_simple.jade
+                                
+                hr.separateLine
+                
+                .profileBlockWrapper.text-center
+                    h2 Пригласи друзей, сними будет веселее
+                    p твоя реферальная ссылка: http://brainny.herokuapp.com/?ref=#{user.username}
+                    br
+                    p Или можешь пригласить друзей по почте
+                    
+                    
+                        form(method="post" action="invitefriend")
+                            .row
+                                div.form-group.col-md-6.col-md-offset-3
+                                    input.form-control(type="email" name="email" placeholder="Email" required)
+                            .row
+                                div.form-group.col-md-12
+                                    input.btn.btn-default(type="submit" value="Пригласить")
             else 
                 h2 #{error} =( 
             
-            form(method="post" action="updateScore")
+            // form(method="post" action="updateScore")
                 input(type="submit" value="Обновить счет")
 
         div.container    

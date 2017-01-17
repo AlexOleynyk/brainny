@@ -1,0 +1,105 @@
+/* power brain */
+.game_process_info {
+  position: absolute;
+  width: 100%; }
+
+.game_progress {
+  height: 5px;
+  width: 100%; }
+  .game_progress .game_progress_done {
+    height: 100%;
+    width: 0%;
+    background: #2fb16f;
+    transition: width 1s linear; }
+
+.main_game_wrapper {
+  position: relative;
+  width: 100%;
+  height: 595px;
+  animation: mainGameWrapperAppearence 0.5s forwards 0.5s; }
+
+@keyframes mainGameWrapperAppearence {
+  1% {
+    display: block; }
+  100% {
+    opacity: 1; } }
+  .main_game_wrapper.myHidden {
+    display: none;
+    opacity: 0; }
+
+.main_game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.board {
+  position: relative;
+  text-align: center; }
+  .board .wrapper.move_top {
+    animation: moveTop 5s infinite; }
+
+@keyframes moveTop {
+  100% {
+    transform: translate(0, -200px); } }
+  .board .wrapper.move_rigth {
+    animation: moveRight 5s infinite; }
+
+@keyframes moveRight {
+  100% {
+    transform: translate(200px, 0); } }
+  .board .wrapper.move_bot {
+    animation: moveBot 5s infinite; }
+
+@keyframes moveBot {
+  100% {
+    transform: translate(0, 200px); } }
+  .board .wrapper.move_left {
+    animation: moveLeft 5s infinite; }
+
+@keyframes moveLeft {
+  100% {
+    transform: translate(-200px, 0); } }
+  .board .plane {
+    display: block;
+    width: 192px;
+    height: 192px; }
+    .board .plane.green {
+      background: url(../../img/green_planes.png); }
+    .board .plane.yellow {
+      background: url(../../img/yellow_planes.png); }
+    .board .plane.top {
+      transform: rotate(0deg); }
+    .board .plane.rigth {
+      transform: rotate(90deg); }
+    .board .plane.bot {
+      transform: rotate(180deg); }
+    .board .plane.left {
+      transform: rotate(270deg); }
+
+.helpers .score {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  padding-top: 30px;
+  transform: translate(-50%, 0%); }
+
+.helpers .left {
+  opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  padding-left: 20px;
+  transform: translate(0, -50%); }
+  .helpers .left img {
+    padding-right: 20px; }
+
+.helpers .right {
+  opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  padding-right: 20px;
+  transform: translate(0, -50%); }
+  .helpers .right img {
+    padding-left: 20px; }

@@ -1,0 +1,210 @@
+/* power brain */
+
+$bgColorLight: #131728;
+$bgColorDark: #352743;
+$good: #2fb16f;
+$bad: #e04d42;
+$btnPrimary: #2fb16f;
+$memory: #48b3fe;
+$logic: #2fb16f;
+$attention: #e04d42;
+$reaction: #edc35d;
+$shadow: #131728;
+
+.game_process_info {
+    position: absolute;
+    width: 100%;
+}
+
+.game_progress {
+    height: 5px;
+    width: 100%;
+    .game_progress_done {
+        height: 100%;
+        width: 0%;
+        background: $btnPrimary;
+        transition: width 1s linear;
+    }
+}
+
+.main_game_wrapper {
+    position: relative;
+    width: 100%;
+    height: 595px;
+    animation: mainGameWrapperAppearence 0.5s forwards 0.5s;
+    @keyframes mainGameWrapperAppearence {
+        1% {
+            display: block;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+     &.myHidden {
+        display: none;
+        opacity: 0;
+    }
+}
+
+.main_game{
+    // background: rgba(#000, 0.1);
+    // width: 400px;
+    // height: 400px;
+    // height: 400px;
+    // width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+   
+}
+
+.board {
+    position: relative;
+    text-align: center;
+}
+
+.helpers {
+   
+    .score {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        padding-top: 30px;
+        transform: translate(-50%, 0%);
+    }
+    
+    .left {
+         opacity: 0.7;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        padding-left: 20px;
+        transform: translate(0, -50%);
+        img {
+            padding-right: 20px;
+        }
+    }
+    
+    .right {
+         opacity: 0.7;
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        padding-right: 20px;
+        transform: translate(0, -50%);
+         img {
+            padding-left: 20px;
+        }
+    }
+}
+
+.card {
+    font-size: 26px;
+    background: rgba(white, 1);
+    padding: 15px 30px;
+    border-radius: 10px;
+    color: $bgColorLight;
+    position: relative;
+    box-shadow: 0 0 10px 0 $shadow;
+    transition: all 0.4s;
+    //display: inline-block;
+    &:first-of-type {
+        z-index: 10;
+        transform: translate(0%, 0%) scale(1.0);
+    }
+    &:nth-of-type(2) {
+        z-index: 9;
+        transform: translate(0%, -70%) scale(0.9);
+    }
+    &.good {
+        color: white;
+        background: rgba($good, 0.9);
+    }
+    &.bad {
+        color: white;
+        background: rgba($bad, 0.9);
+    }
+    &.move_left {
+        animation: moveLeft 0.4s;
+    }
+    @keyframes moveLeft {
+        100% {
+            transform: translate(-50%, 0);
+            opacity: 0;
+        }
+    }
+    &.move_right {
+        animation: moveRight 0.4s;
+    }
+    @keyframes moveRight {
+        100% {
+            transform: translate(50%, 0);
+            opacity: 0;
+        }
+    }
+}
+
+.cell {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    transform: scale(0.1);
+    animation: cellApperence 0.1s ease-in-out forwards;
+    @keyframes cellApperence {
+        100% {
+            transform: scale(1);
+        }
+    }
+    &.active {
+        background: $memory;
+    }
+    &.flip.active {
+        background: white;
+        animation: activeFlip 0.4s forwards ease-in-out;
+        transform: rotateY(-180deg);
+        @keyframes activeFlip {
+            0% {
+                transform: rotateY(-180deg);
+            }
+            49% {
+                background: white;
+            }
+            50% {
+                background: $memory;
+            }
+            100% {
+                background: $memory;
+                transform: rotateY(0deg);
+            }
+        }
+    }
+    &.flip.fail {
+        background: white;
+        animation: failFlip 0.4s forwards ease-in-out;
+        transform: rotateY(-180deg);
+        @keyframes failFlip {
+            0% {
+                transform: rotateY(-180deg);
+            }
+            49% {
+                background: white;
+            }
+            50% {
+                background: $attention;
+            }
+            100% {
+                background: $attention;
+                transform: rotateY(0deg);
+            }
+        }
+    }
+}
