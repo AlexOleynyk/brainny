@@ -457,6 +457,10 @@ app.get('/workout', function(req, res) {
         res.status(404).send(err);
       }
       else {
+        if (findedUser.dailyWorkout == 4) {
+          res.redirect('/');
+          return;
+        }
         var workout = dailyWorkout[+findedUser.dailyWorkout];
         // var gameAchivments = allAchivments.filter(function(item) {
         //   return (item.game == workout.game);
@@ -469,12 +473,17 @@ app.get('/workout', function(req, res) {
 
         console.log(gameAchivments);
 
-        res.render('workout.jade', {
-          currentUser: findedUser,
-          workout: workout,
-          daily: daily,
-          achivments: gameAchivments
-        });
+        
+        
+          res.render('workout.jade', {
+            currentUser: findedUser,
+            workout: workout,
+            daily: daily,
+            achivments: gameAchivments
+          });
+        
+
+
       }
 
     });
@@ -485,7 +494,7 @@ app.get('/workout', function(req, res) {
   }
 })
 
-app.get('/workout_check', function(req, res) {  
+app.get('/workout_check', function(req, res) {
   if (req.session.user) {
     var user = req.session.user;
 
@@ -508,16 +517,18 @@ app.get('/workout_check', function(req, res) {
         // обновление информации игрока
         if (workout == 4) {
           workout = 0;
-          
-        } else if (workout > dailyWorkout.length - 1) {
+
+        }
+        else if (workout > dailyWorkout.length - 1) {
 
           //завершил тренировку - молодчик!
           //workout = 0;
           findedUser.statistic.workoutsComplete += 1;
           console.log('Завершил тренировку');
-          
-          
-        } else {
+
+
+        }
+        else {
 
           //var coins = +req.query.coins || 0;
 
@@ -943,7 +954,8 @@ app.get('/:username', (req, res) => {
         })
       }
     }
-  } else {
+  }
+  else {
     res.redirect('/');
   }
 })
