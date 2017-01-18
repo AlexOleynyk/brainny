@@ -62,26 +62,31 @@ head
                                 
                 .profileBlockWrapper    
                     h3 Достижения
-                    each achive in achivments
-                        include components/achivments_simple.jade
-                        include components/achivments_simple.jade
+                    if achivments.length != 0
+                        each achive in achivments
+                            include components/achivments_simple.jade
+                            include components/achivments_simple.jade
+                    else 
+                        div.text-center Пока что достижений нет
                                 
-                hr.separateLine
                 
-                .profileBlockWrapper.text-center
-                    h2 Пригласи друзей, сними будет веселее
-                    p твоя реферальная ссылка: http://brainny.herokuapp.com/?ref=#{user.username}
-                    br
-                    p Или можешь пригласить друзей по почте
-                    
-                    
-                        form(method="post" action="invitefriend")
-                            .row
-                                div.form-group.col-md-6.col-md-offset-3
-                                    input.form-control(type="email" name="email" placeholder="Email" required)
-                            .row
-                                div.form-group.col-md-12
-                                    input.btn.btn-default(type="submit" value="Пригласить")
+                
+                if currentUser.username == user.username
+                    hr.separateLine
+                    .profileBlockWrapper.text-center
+                        h2 Пригласи друзей, сними будет веселее
+                        p твоя реферальная ссылка: http://brainny.herokuapp.com/?ref=#{user.username}
+                        br
+                        p Или можешь пригласить друзей по почте
+                        
+                        
+                            form(method="post" action="invitefriend")
+                                .row
+                                    div.form-group.col-md-6.col-md-offset-3
+                                        input.form-control(type="email" name="email" placeholder="Email" required)
+                                .row
+                                    div.form-group.col-md-12
+                                        input.btn.btn-default(type="submit" value="Пригласить")
             else 
                 h2 #{error} =( 
             

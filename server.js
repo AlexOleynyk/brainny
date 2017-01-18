@@ -466,7 +466,7 @@ app.get('/workout', function(req, res) {
         var gameAchivments = allAchivments.filter(function(item) {
           return (item.game == workout.game && userAchivments.indexOf(item.title) == -1);
         });
-        
+
         console.log(gameAchivments);
 
         res.render('workout.jade', {
@@ -866,77 +866,80 @@ app.post('/invitefriend', function(req, res) {
 
 
 app.get('/:username', (req, res) => {
-  if (req.params.username != 'favicon.ico') {
-    var user = req.session.user;
-    if (user.username == req.params.username) {
-      userSchema.findOne({
-        username: user.username
-      }, function(err, findedUser) {
-        if (err) {
-          console.log(err);
-          res.status(501).send(err);
-        }
-        else {
-          if (findedUser) {
-            
-            var userAchivments = findedUser.achivments;
-            var filteredUserAchivments = allAchivments.filter(function(item) {
-              return (userAchivments.indexOf(item.title) != -1);
-            });
-            
-            
-            res.render('profile.jade', {
-              currentUser: user,
-              user: findedUser,
-              isMyProfile: false,
-              achivments: filteredUserAchivments
-            })
-          }
-
-
-        }
-      })
-    }
-    else {
-
-      userSchema.findOne({
-        username: req.params.username
-      }, function(err, findedUser) {
-        if (err) {
-          console.log(err);
-          res.status(501).send(err);
-        }
-        else {
-          if (findedUser) {
-            var userAchivments = findedUser.achivments;
-            var filteredUserAchivments = allAchivments.filter(function(item) {
-              return (userAchivments.indexOf(item.title) != -1);
-            });
-            
-            //console.log('here 1');
-            res.render('profile.jade', {
-              currentUser: user,
-              user: findedUser,
-              isMyProfile: false,
-              achivments: filteredUserAchivments
-            })
+  if (req.session.user) {
+    if (req.params.username != 'favicon.ico') {
+      var user = req.session.user;
+      if (user.username == req.params.username) {
+        userSchema.findOne({
+          username: user.username
+        }, function(err, findedUser) {
+          if (err) {
+            console.log(err);
+            res.status(501).send(err);
           }
           else {
-            //console.log('here');
-            res.render('profile.jade', {
-              currentUser: user,
-              user: {
-                username: 'Нет такого пользователя'
-              },
-              error: 'Нет такого пользователя',
-              isMyProfile: false
-            })
-          }
-        }
-      })
-    }
-  }
+            if (findedUser) {
 
+              var userAchivments = findedUser.achivments;
+              var filteredUserAchivments = allAchivments.filter(function(item) {
+                return (userAchivments.indexOf(item.title) != -1);
+              });
+
+
+              res.render('profile.jade', {
+                currentUser: user,
+                user: findedUser,
+                isMyProfile: false,
+                achivments: filteredUserAchivments
+              })
+            }
+
+
+          }
+        })
+      }
+      else {
+
+        userSchema.findOne({
+          username: req.params.username
+        }, function(err, findedUser) {
+          if (err) {
+            console.log(err);
+            res.status(501).send(err);
+          }
+          else {
+            if (findedUser) {
+              var userAchivments = findedUser.achivments;
+              var filteredUserAchivments = allAchivments.filter(function(item) {
+                return (userAchivments.indexOf(item.title) != -1);
+              });
+
+              //console.log('here 1');
+              res.render('profile.jade', {
+                currentUser: user,
+                user: findedUser,
+                isMyProfile: false,
+                achivments: filteredUserAchivments
+              })
+            }
+            else {
+              //console.log('here');
+              res.render('profile.jade', {
+                currentUser: user,
+                user: {
+                  username: 'Нет такого пользователя'
+                },
+                error: 'Нет такого пользователя',
+                isMyProfile: false
+              })
+            }
+          }
+        })
+      }
+    }
+  } else {
+    res.redirect('/');
+  }
 })
 
 
