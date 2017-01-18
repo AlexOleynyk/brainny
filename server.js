@@ -816,7 +816,7 @@ app.post('/invitefriend', function(req, res) {
 
       // setup e-mail data with unicode symbols 
       var mailOptions = {
-        from: '"Brainny - сервис тренировка мозга" <oleynalex@yandex.ru>', // sender address 
+        from: '"Brainny - сервис тренировки мозга" <oleynalex@yandex.ru>', // sender address 
         to: req.body.email, // list of receivers 
         subject: 'Приглашение в Brainny', // Subject line 
         text: 'Привет', // plaintext body 
