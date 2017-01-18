@@ -79,7 +79,12 @@
             - each item, index in workout
                 .col-md-3
                     if index < currentUser.dailyWorkout
-                        .complete_game_preview(class="#{item.category}")
+                        - var color
+                        - if (item.category == "memory_game") color = 'linear-gradient(to top, rgba(72, 179, 254, 0.9), rgba(72, 179, 254, 0.9))'
+                        - if (item.category == "logic_game") color = 'linear-gradient(to top, rgba(47, 177, 111, 0.9), rgba(47, 177, 111, 0.9))'
+                        - if (item.category == "attention_game") color = 'linear-gradient(to top, rgba(224, 77, 66, 0.9), rgba(224, 77, 66, 0.9))'
+                        - if (item.category == "reaction_game") color = 'linear-gradient(to top, rgba(237, 195, 93, 0.9), rgba(237, 195, 93, 0.9))'
+                        .complete_game_preview(class="#{item.category}" style="background: #{color} , url(../../img/#{item.game}.png); background-size: cover;")
                                 .tag
                                    span(class="#{item.category}") #{item.categoryRu}
                                 .done_wrapper

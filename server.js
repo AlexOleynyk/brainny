@@ -485,7 +485,7 @@ app.get('/workout', function(req, res) {
   }
 })
 
-app.get('/workout_check', function(req, res) {
+app.get('/workout_check', function(req, res) {  
   if (req.session.user) {
     var user = req.session.user;
 
@@ -504,14 +504,20 @@ app.get('/workout_check', function(req, res) {
 
 
         var workout = findedUser.dailyWorkout;
+        console.log('\nworkout до обработки ' + workout);
         // обновление информации игрока
-        if (workout > dailyWorkout.length - 2) {
+        if (workout == 4) {
+          workout = 0;
+          
+        } else if (workout > dailyWorkout.length - 1) {
 
           //завершил тренировку - молодчик!
-          workout = 0;
+          //workout = 0;
           findedUser.statistic.workoutsComplete += 1;
-        }
-        else {
+          console.log('Завершил тренировку');
+          
+          
+        } else {
 
           //var coins = +req.query.coins || 0;
 
@@ -565,7 +571,7 @@ app.get('/workout_check', function(req, res) {
         findedUser.dailyWorkout = workout;
 
 
-
+        console.log('workout после обработки ' + workout);
 
         // проверка выполнения всех достижений основанных на статистике
 
@@ -578,8 +584,8 @@ app.get('/workout_check', function(req, res) {
 
         mainAchivments.map(function(item) {
           var cryteria = item.cryteria;
-          console.log(cryteria);
-          console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
+          console.log(item.title, cryteria);
+          //console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
           // проверка выполнения условия в формате "значение до" - "значение после"
           if (eval(cryteria)) {
             console.log(findedUser.username + ' - ' + item.title + ': achive complete!');
@@ -629,13 +635,13 @@ app.get('/workout_check', function(req, res) {
         var gameAchivments = allAchivments.filter(function(item) {
           return (item.game == gameTitle && userAchivments.indexOf(item.title) == -1);
         });
-        console.log(gameAchivments);
+        console.log('Игровые достижения: ' + gameAchivments);
 
 
 
         gameAchivments.map(function(item) {
           var cryteria = item.cryteria;
-          console.log(cryteria);
+          console.log(item.title, cryteria);
           //console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
           // проверка выполнения условия в формате "значение до" - "значение после"
           if (eval(cryteria)) {
@@ -662,7 +668,7 @@ app.get('/workout_check', function(req, res) {
         var dailyAchivment = daily;
         if (dailyAchivment && !findedUser.completeDailyQuest) {
           var cryteria = dailyAchivment.cryteria;
-          console.log(cryteria);
+          console.log('Ежедневный квест: ' + cryteria);
           //console.log(userOld.statistic.workoutsComplete + ' ' + findedUser.statistic.workoutsComplete);
           // проверка выполнения условия в формате "значение до" - "значение после"
           if (eval(cryteria)) {

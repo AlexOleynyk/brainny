@@ -13,6 +13,7 @@ $(document).ready(function() {
 
         switch (difficulty) {
             case 1:
+            case 0:
                 dimentions = 2;
                 break;
             case 2:
@@ -164,8 +165,18 @@ $(document).ready(function() {
                 $('#startDifficulty').text(levelParam);
                 
                 
-                $('.main_game_wrapper').addClass('myHidden').delay(500).css('display','none');
-                $('.game_results').removeClass('hide_results');
+                setTimeout(()=>{
+                    $('.main_game_wrapper').addClass('myHidden').delay(500).queue(function () { $(this).css('display', 'none'); $(this).dequeue();});
+                $('.game_results').delay(600).queue(function () {$(this).removeClass('hide_results');});
+                },1000);
+                
+                
+                // Установка ссылки на кнопку 
+                $('#nextGame').click(function(){
+        location.href = '/workout_check?errors='+ errors + '&difficulty=' + levelParam+ '&levels=' + levels + '&game=' + gameTitle;
+        // setTimeout(startGame, 1000);
+        
+    })
 
             }
             
@@ -182,18 +193,17 @@ $(document).ready(function() {
     }
 
     $('#start_game').click(function(){
-        $('.game_intro').addClass('hide_intro').delay(500).css('display','none');
+        $('.game_intro').addClass('hide_intro').delay(500).queue(function () { $(this).css('display', 'none'); $(this).dequeue();});
         $('.main_game_wrapper').removeClass('myHidden');
         setTimeout(startGame, 1000);
         
     })
-    $('#nextGame').click(function(){
-        location.href = '/workout_check?coins='+ (levels-errors) + '&difficulty=' + levelParam;
-        // setTimeout(startGame, 1000);
+    
+    
+    
+    })
+
+
+
         
-    })
-    
-    
-    })
-
-
+        
